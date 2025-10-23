@@ -1,0 +1,48 @@
+<div class="flex flex-row items-center h-screen">
+  <div class="w-[28%] px-7.5 flex flex-col items-center justify-center">
+    <img class="h-[120px] w-[64%]" src="../../../../../assets/logo2.png" alt="">
+    <h2 class="mt-4 mb-9 font-extrabold text-[18px] text-black">نظام إدارة وتشفيل رفاد</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full flex flex-col gap-6">
+      <!-- Email Field -->
+      <div class="">
+        <label class="block text-gray-700 text-sm font-medium mb-2 text-right" for="email">
+          البريد الالكتروني
+        </label>
+        <div class="relative">
+          <span class="absolute left-3 top-3 text-refad">
+            <i class='bx bx-envelope text-refad text-[22px]'></i>
+          </span>
+          <input type="email" id="email" formControlName="email" placeholder="admin@refad.com" class="w-full pl-12 py-[9px] outline-none border rounded-lg text-right pr-4
+                   {{ email?.invalid && email?.touched ? 'border-red-500' : 'border-gray-200' }}" />
+        </div>
+        <!-- ERROR TEXT - UNDER INPUT -->
+        <app-form-error [form]="loginForm" controlName="email"></app-form-error>
+      </div>
+
+      <!-- Password Field -->
+      <div class="">
+        <label class="block text-gray-700 text-sm font-medium mb-2 text-right" for="password">
+          كلمة المرور
+        </label>
+        <div class="relative">
+          <span class="absolute left-3 top-3 text-refad">
+            <i class='bx bx-lock text-refad text-[22px]'></i>
+          </span>
+          <input type="password" id="password" formControlName="password" placeholder="**************" class="w-full pl-12 py-[9px] border outline-none rounded-lg text-right pr-4
+                   {{ password?.invalid && password?.touched ? 'border-red-500' : 'border-gray-200' }}" />
+        </div>
+        <!-- ERROR TEXT - UNDER INPUT -->
+        <app-form-error [form]="loginForm" controlName="password"></app-form-error>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid" class="w-full bg-refad hover:opacity-90 mt-2 text-[14px] text-white py-[10px] px-4 rounded-md transition duration-300 mb-4
+               {{ loginForm.invalid ? ' cursor-not-allowed' : '' }}">
+        تسجيل دخول
+      </button>
+    </form>
+  </div>
+  <div class="w-[73%] bg-login h-full flex flex-col   text-white py-8 px-10">
+    
+  </div>
+</div>

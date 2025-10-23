@@ -1,0 +1,295 @@
+<div class="px-4 pb-8">
+    <div class="mb-4 px-2">
+        <p class="text-2xl font-bold py-8">اداره العملاء</p>
+    </div>
+
+    <div class="">
+        <div class="bg-white mb-2 w-full mx-auto">
+            <div class="flex items-center justify-between mb-2 gap-4">
+                <div class="flex items-center gap-3">
+                    <!-- Search Input -->
+                    <div class="relative">
+                        <i class='bx bx-search absolute top-2.5 right-2 text-xl text-gray-500'></i>
+                        <input type="text" [formControl]="searchControl"
+                            class="placeholder:text-gray-400 outline-none px-8 text-[12px] flex w-[240px] py-2 border border-gray-200 rounded-md"
+                            placeholder="ابحث">
+                    </div>
+
+                    <!-- Status Filter Dropdown -->
+                    <div class="relative" #statusDropdown>
+                        <button (click)="toggleStatusDropdown()"
+                            class="bg-white text-gray-500 px-2 py-2 justify-between rounded-md border border-gray-200 flex text-xs items-center gap-3 transition-colors min-w-[95px]">
+                            <span class="text-[12px]">{{ getSelectedStatusLabel() }}</span>
+                            <i class='bx bx-chevron-down text-xl'></i>
+                        </button>
+
+                        <!-- Dropdown Menu -->
+                        @if (isStatusDropdownOpen()) {
+                        <div
+                            class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                            @for (option of statusOptions; track option.value) {
+                            <button (click)="selectStatus(option.value)"
+                                class="w-full text-right px-4 py-2 text-xs hover:bg-gray-50 transition-colors"
+                                [class.bg-gray-100]="selectedStatus() === option.value">
+                                {{ option.label }}
+                            </button>
+                            }
+                        </div>
+                        }
+                    </div>
+
+                    <!-- Reset Button -->
+                    <button (click)="resetFilters()"
+                        class="bg-white text-gray-500 py-2 rounded-md flex text-[12px] items-center gap-1 transition-colors hover:bg-gray-50">
+                        <i class='bx bx-revision text-xl'></i>
+                        <span class="text-xs font-semibold">إعادة</span>
+                    </button>
+                </div>
+
+                <!-- Right Side Buttons -->
+                <div class="flex items-center gap-3">
+                    <button (click)="exportToExcel()"
+                        class="bg-white text-gray-700 px-4 py-2 rounded-md border border-gray-200 text-xs flex items-center gap-2 transition-colors hover:bg-gray-50">
+                        <i class='bx bx-download text-[#667085] text-xl'></i>
+                        <span>تصدير اكسل</span>
+                    </button>
+                    <button routerLink="/admin/customer/add"
+                        class="bg-[#00853e] text-white cursor-pointer px-4 py-2 rounded-md flex items-center gap-2 transition-colors font-medium text-xs hover:bg-[#007036]">
+                        <i class='bx bx-plus text-xl'></i>
+                        <span>إضافة عميل جديد</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="max-w-[85rem] mx-auto">
+        <div class="flex flex-col">
+            <div
+                class="overflow-x-auto rounded-md [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
+                <div class="min-w-full inline-block align-middle">
+                    <div class="bg-white border rounded-md border-[#ebecf5] overflow-hidden">
+
+                        <!-- Loading State -->
+                        @if (isLoading()) {
+                        <div class="flex items-center justify-center py-12">
+                            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00853e]"></div>
+                        </div>
+                        }
+
+                        <!-- Table -->
+                        @else {
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-[#fafbfb]">
+                                <tr>
+                                    <th scope="col" class="ps-6 text-nowrap px-2 py-2 text-start">
+                                        <label for="hs-at-with-checkboxes-main" class="flex">
+                                            <input type="checkbox"
+                                                class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500"
+                                                id="hs-at-with-checkboxes-main">
+                                            <span class="sr-only">Checkbox</span>
+                                        </label>
+                                    </th>
+                                    <th scope="col" class="ps-6 text-nowrap lg:ps-3 xl:ps-0 pe-6 py-2 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-[12px] font-semibold uppercase text-[#42526d]">اسم
+                                                الشركة</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 text-nowrap py-2 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-xs font-semibold uppercase text-[#42526d]">الشخص
+                                                المسؤول</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 text-nowrap py-2 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-xs font-semibold uppercase text-[#42526d]">رقم
+                                                الموبايل</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 text-nowrap py-2 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-xs font-semibold uppercase text-[#42526d]">العنوان</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 text-nowrap py-2 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-xs font-semibold uppercase text-[#42526d]">الحالة</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 text-nowrap py-2 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-xs font-semibold uppercase text-[#42526d]">حد
+                                                السيارات</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 text-nowrap py-2 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-xs font-semibold uppercase text-[#42526d]">التكلفة
+                                                الشهرية</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-4 text-nowrap py-2 text-end"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <!-- No Data State -->
+                                @if (customers().length === 0) {
+                                <tr>
+                                    <td colspan="9" class="text-center py-12">
+                                        <div class="flex flex-col items-center gap-2">
+                                            <i class='bx bx-inbox text-5xl text-gray-300'></i>
+                                            <p class="text-gray-500 text-sm">لا توجد بيانات</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                }
+
+                                <!-- Data Rows -->
+                                @for (customer of customers(); track customer.id) {
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="size-px whitespace-nowrap">
+                                        <div class="ps-6 py-3">
+                                            <label [for]="'checkbox-' + customer.id" class="flex">
+                                                <input type="checkbox"
+                                                    class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500"
+                                                    [id]="'checkbox-' + customer.id">
+                                                <span class="sr-only">Checkbox</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="size-px whitespace-nowrap">
+                                        <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                                            <div class="flex items-center gap-x-3">
+                                                <!-- <img *ngIf="customer.logoPath;"
+                                                    [src]="'https://localhost:7069/image/companies/logos/' + customer.logoPath"
+                                                    alt="Company Logo"
+                                                    class="w-8 h-8 rounded-full object-cover border border-gray-300" /> -->
+
+                                                <span *ngIf="customer.logoPath;"
+                                                    class="inline-flex items-center justify-center size-8 rounded-full bg-[#667085]">
+                                                    <span class="font-medium text-[12px] text-white">
+                                                        {{ customer.companyNameArabic.charAt(0) }}
+                                                    </span>
+                                                </span>
+                                                <div class="grow">
+                                                    <span class="block text-xs font-bold text-gray-800">
+                                                        {{ customer.companyNameArabic }}
+                                                    </span>
+                                                    <span class="block text-[12px] text-gray-500">
+                                                        {{ customer.email }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="h-px w-72 whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <span class="block text-xs font-medium text-gray-800">
+                                                {{ customer.responsiblePerson }}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="h-px w-72 whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <span class="block text-xs font-medium text-gray-800">
+                                                {{ customer.mobile }}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="h-px w-72 whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <span class="block text-xs font-medium text-gray-800">
+                                                {{ customer.address }}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="size-px whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <span
+                                                [class]="'py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-full ' + getStatusClass(customer.status)">
+                                                <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16"
+                                                    height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                                </svg>
+                                                {{ getStatusLabel(customer.status) }}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="size-px whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <div class="flex items-center gap-x-3">
+                                                <span class="text-xs text-gray-500">
+                                                    {{ customer.carLimitCount }}
+                                                </span>
+                                                <div class="flex w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                                    <div class="flex flex-col justify-center overflow-hidden bg-teal-600"
+                                                        role="progressbar"
+                                                        [style.width.%]="getCarLimitPercentage(customer)"
+                                                        [attr.aria-valuenow]="getCarLimitPercentage(customer)"
+                                                        aria-valuemin="0" aria-valuemax="100">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="size-px whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <span class="text-[12px] font-semibold text-gray-800">
+                                                {{ customer.monthlyCostPerCar }} ر.س
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="size-px whitespace-nowrap">
+                                        <div class="px-2 flex items-center gap-1.5 py-2">
+                                            <i [routerLink]="['/admin/customer/details', customer.id]"
+                                                class='bx bx-show text-xl font-thin text-[#7a8392] cursor-pointer hover:text-[#5a6372]'
+                                                title="عرض">
+                                            </i>
+                                            <i [routerLink]="['/admin/customer/edit', customer.id]"
+                                                class='bx bx-edit-alt font-thin text-xl text-[#8c94a3] cursor-pointer hover:text-[#6c7483]'
+                                                title="تعديل">
+                                            </i>
+                                            <div class="flex items-center gap-x-3">
+                                                <label [for]="'toggle-' + customer.id"
+                                                    class="relative inline-block w-[30px] h-4.5 cursor-pointer">
+                                                    <input type="checkbox" [id]="'toggle-' + customer.id"
+                                                        class="peer sr-only" [checked]="customer.status === 'active'"
+                                                        (change)="toggleCustomerStatus(customer, $event)" />
+                                                    <span
+                                                        class="absolute inset-0 bg-gray-200 rounded-full transition-colors duration-200 ease-in-out peer-checked:bg-[#00853e]"></span>
+                                                    <span
+                                                        class="absolute top-1/2 left-0 -translate-y-1/2 h-[13.8px] w-[13.8px] bg-white rounded-full shadow-sm transition-transform duration-200 ease-in-out peer-checked:translate-x-full"></span>
+                                                </label>
+                                            </div>
+                                            <i (click)="deleteCustomer(customer.id, $event)"
+                                                class='bx bx-trash text-xl text-[#eb6d66] cursor-pointer hover:text-[#d55d56]'
+                                                title="حذف">
+                                            </i>
+                                        </div>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                        }
+                        <div class="flex items-center justify-between w-full mt-2 px-4">
+                            <app-pagination class="w-full" [currentPage]="paginationService.currentPage()"
+                                [totalPages]="paginationService.totalPages()"
+                                [totalItems]="paginationService.totalItems()"
+                                [startRecord]="paginationService.startRecord()"
+                                [endRecord]="paginationService.endRecord()"
+                                [pageNumbers]="paginationService.pageNumbers()" [isLoading]="isLoading"
+                                (pageChange)="onPageChange($event)" (previousPage)="onPreviousPage()"
+                                (nextPage)="onNextPage()"></app-pagination>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

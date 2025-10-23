@@ -1,0 +1,52 @@
+{
+    "SIDEBAR": {
+        "SELECT_CATEGORY": "اختر فئة",
+        "CATEGORIES": "فئات",
+        "ITEMS": "عناصر",
+        "SELECT_CATEGORY_TO_VIEW": "اختر فئة لعرض العناصر",
+        "NO_ITEMS_FOUND": "لا توجد عناصر في هذه الفئة"
+    },
+    "HEADER": {
+        "ATTACHMENTS": "المرفقات",
+        "SYSTEM_LOG": "ملف سجلات النظام",
+        "DECISION_SUPPORT": "دعم القرار",
+        "APPROVAL_STATUS": "حالة الموافقات",
+        "OPEN_ACTIVITIES": "الأنشطة المفتوحة"
+    },
+    "EMPLOYEE": {
+        "ID": "رقم الموظف",
+        "STATUS": "الحالة",
+        "FULL_NAME_EN": "الاسم بالإنجليزية",
+        "FULL_NAME_AR": "الاسم بالعربية",
+        "DATE_OF_BIRTH": "تاريخ الميلاد",
+        "GENDER": "النوع",
+        "SPONSOR": "المتعاقد معه",
+        "SPONSOR_NEED": "يحتاج لتعاقد",
+        "SPONSOR_ANOTHER": "متعاقد آخر",
+        "SPONSOR_COMPANY": "شركة التعاقد",
+        "BANK_ACCOUNT_ID": "رقم الحساب البنكي",
+        "ATM_CARD_NO": "رقم بطاقة الراتب",
+        "BANK_NAME": "البنك",
+        "CASH": "موظف كاش",
+        "LOGIN_USER": "مستخدم الدخول",
+        "ACTIVITY": "النشاط",
+        "DEPARTMENT": "الإدارة",
+        "AREA": "المنطقة",
+        "PROJECT": "المشروع",
+        "PURPOSE": "الغرض",
+        "EXPENDITURE_TYPE": "نوع المصروف",
+        "LAST_CALCULATED_SALARY": "آخر احتساب راتب",
+        "HIRING_DATE": "تاريخ التعيين",
+        "IDENTITY_NO": "رقم الهوية",
+        "IDENTITY_EXPIRE_ON": "تاريخ انتهاء الهوية",
+        "GUID": "المعرف الفريد للموظف"
+    },
+    "employeeFiles": {
+        "title": "ملفات الموظفين",
+        "description": "نظرة عامة وإدارة الموظفين",
+        "addEmployee": "إضافة موظف",
+        "print": "طباعة",
+        "showLabel": "عرض:",
+        "searchPlaceholder": "ابحث عن الموظفين..."
+    }
+}

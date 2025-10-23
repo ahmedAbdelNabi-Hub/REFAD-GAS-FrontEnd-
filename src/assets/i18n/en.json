@@ -1,0 +1,52 @@
+{
+  "SIDEBAR": {
+    "SELECT_CATEGORY": "Select a Category",
+    "CATEGORIES": "categories",
+    "ITEMS": "items",
+    "SELECT_CATEGORY_TO_VIEW": "Select a category to view items",
+    "NO_ITEMS_FOUND": "No items found in this category"
+  },
+  "HEADER": {
+    "ATTACHMENTS": "Attachments",
+    "SYSTEM_LOG": "System Log File",
+    "DECISION_SUPPORT": "Decision Support",
+    "APPROVAL_STATUS": "Approvals Status",
+    "OPEN_ACTIVITIES": "Open Activities"
+  },
+  "EMPLOYEE": {
+    "ID": "Employee ID",
+    "STATUS": "Status",
+    "FULL_NAME_EN": "English Full Name",
+    "FULL_NAME_AR": "Arabic Full Name",
+    "DATE_OF_BIRTH": "Date of Birth",
+    "GENDER": "Gender",
+    "SPONSOR": "Sponsor",
+    "SPONSOR_NEED": "Sponsor Need",
+    "SPONSOR_ANOTHER": "Sponsor Another",
+    "SPONSOR_COMPANY": "Sponsor Company",
+    "BANK_ACCOUNT_ID": "Bank Account ID",
+    "ATM_CARD_NO": "ATM Card No",
+    "BANK_NAME": "Bank Name",
+    "CASH": "Cash",
+    "LOGIN_USER": "Login User",
+    "ACTIVITY": "Activity",
+    "DEPARTMENT": "Department",
+    "AREA": "Area",
+    "PROJECT": "Project",
+    "PURPOSE": "Purpose",
+    "EXPENDITURE_TYPE": "Expenditure Type",
+    "LAST_CALCULATED_SALARY": "Last Calculated Salary",
+    "HIRING_DATE": "Hiring Date",
+    "IDENTITY_NO": "Identity No",
+    "IDENTITY_EXPIRE_ON": "Identity Expire On",
+    "GUID": "Employee GUID"
+  },
+  "employeeFiles": {
+    "title": "Employees Files",
+    "description": "Employee overview and management",
+    "addEmployee": "Add Employee",
+    "print": "Print",
+    "showLabel": "Show:",
+    "searchPlaceholder": "Search employees..."
+  }
+}

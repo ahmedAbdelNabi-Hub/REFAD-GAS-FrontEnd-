@@ -1,0 +1,6 @@
+/* Active Tab Styles */
+.data-active {
+    color: #00853e;
+    border-bottom: 3px solid #00853e;
+    font-weight: 1500;
+}

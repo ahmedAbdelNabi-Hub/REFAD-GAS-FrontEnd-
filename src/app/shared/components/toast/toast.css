@@ -1,0 +1,33 @@
+.toast-enter {
+    opacity: 0;
+    transform: translateX(100%) translateY(100%) scale(0.8);
+    animation: toastIn 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.toast-leave {
+    animation: toastOut 0.25s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes toastIn {
+    0% {
+        opacity: 0;
+        transform: translateX(100%) translateY(100%) scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) scale(1);
+    }
+}
+
+@keyframes toastOut {
+    0% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(100%) translateY(0) scale(0.8);
+    }
+}

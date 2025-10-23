@@ -1,0 +1,64 @@
+<div class="fixed bottom-4 end-0 flex-col py-8 gap-2 px-8 flex items-center justify-center z-[100]">
+    <div *ngFor="let messageItem of messageQueue(); let i = index; trackBy: trackByFn"
+        class="fixed transition-all left-3 duration-300 
+         end-0" [style.zIndex]=" i * 10" [style.bottom]="(i+3*10) +'px'">
+       
+
+        <div [ngClass]="{
+          'bg-gradient-to-r from-emerald-100 to-emerald-50': messageItem.type === 'success',
+          'bg-gradient-to-r from-rose-100 to-rose-50': messageItem.type === 'error'
+        }" class="max-w-xs border border-gray-200/30 backdrop-blur-sm rounded-xl "
+            role="alert" tabindex="-1">
+
+            <button (click)="closeToast(i)"
+                class="absolute top-2 end-2 z-10 p-1 text-[#c29a5b] hover:text-gray-800 hover:bg-gray-200 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                aria-label="Close toast">
+                <svg class="size-5 text-[#c29a5b]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    fill="currentColor">
+                    <path
+                        d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z" />
+                </svg>
+            </button>
+
+            <div class="flex p-1">
+                <div>
+                    <div class="max-w-xs bg-white border border-gray-200 rounded-xl shadow-lg" role="alert">
+                        <div class="flex p-4">
+                            <div class="shrink-0">
+                                <ng-container [ngSwitch]="messageItem.type">
+                                    <svg *ngSwitchCase="'success'" class="shrink-0 size-5 text-teal-500 mt-0.5"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                    <svg *ngSwitchCase="'error'" class="shrink-0 size-5 text-red-500 mt-0.5"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                    </svg>
+                                </ng-container>
+                            </div>
+                            <div class="ms-4 w-[400px]">
+                                <h3 *ngIf="messageItem.type==='success'"
+                                    class="text-gray-800 text-[12px] font-semibold">
+                                    completed successfully
+                                </h3>
+                                <h3 *ngIf="messageItem.type==='error'" class="text-red-800 text-[12px] font-semibold">
+                                    Something wrong
+                                </h3>
+                                <div class="mt-1 text-[14px] font-medium text-gray-600">
+                                    {{ messageItem.message }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

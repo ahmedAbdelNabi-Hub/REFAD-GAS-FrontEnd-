@@ -1,0 +1,74 @@
+<div class="px-4">
+    <div class="mb-4 px-2">
+        <p class="text-2xl font-bold py-8">تعديل المشرف</p>
+    </div>
+    <form [formGroup]="supervisorForm" (ngSubmit)="onSubmit()" class="px-3 text-[#1f2635] flex flex-col gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Email -->
+            <div class="flex flex-col gap-2">
+                <label for="email" class="font-bold text-sm">البريد الإلكتروني*</label>
+                <div class="relative">
+                    <input type="email" id="email" formControlName="email" placeholder="البريد الإلكتروني" [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (email?.invalid && email?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-envelope absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="supervisorForm" controlName="email"></app-form-error>
+            </div>
+
+            <!-- Full Name -->
+            <div class="flex flex-col gap-2">
+                <label for="fullName" class="font-bold text-sm">الاسم الكامل*</label>
+                <div class="relative">
+                    <input type="text" id="fullName" formControlName="fullName" placeholder="الاسم الكامل" [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (fullName?.invalid && fullName?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-user absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="supervisorForm" controlName="fullName"></app-form-error>
+            </div>
+
+            <!-- Password -->
+            <div class="flex flex-col gap-2">
+                <label for="passwordHash" class="font-bold text-sm">كلمة المرور</label>
+                <div class="relative">
+                    <input type="password" id="passwordHash" formControlName="passwordHash"
+                        placeholder="كلمة المرور (اختياري)" [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (passwordHash?.invalid && passwordHash?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-lock-alt absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="supervisorForm" controlName="passwordHash"></app-form-error>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-gray-200 py-4">
+            <!-- Role -->
+            <div class="flex flex-col gap-2">
+                <label for="role" class="font-bold text-sm">الدور*</label>
+                <div class="relative">
+                    <select id="role" formControlName="role" [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border appearance-none ' + 
+                            (role?.invalid && role?.touched ? 'border-red-500' : 'border-[#ebecf5]')">
+                        <option value="" disabled>اختر الدور</option>
+                        <option *ngFor="let option of roleOptions" [value]="option.value">
+                            {{ option.label }}
+                        </option>
+                    </select>
+                    <i class='bx bx-user-check absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="supervisorForm" controlName="role"></app-form-error>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center justify-end gap-4 pt-6 pb-6">
+            <button type="submit"
+                class="bg-[#00853e] text-white cursor-pointer px-6 py-3.5 rounded-md flex items-center gap-2 transition-colors font-medium text-sm">
+                <i class='bx bx-save text-xl'></i>
+                <span>حفظ التغييرات</span>
+            </button>
+            <button type="button" (click)="onCancel()"
+                class="bg-[#ffffff] text-[#667085] cursor-pointer px-4 py-3.5 rounded-md flex items-center gap-0.5 border border-fuchsia-100 transition-colors font-medium text-sm">
+                <i class='bx bx-x text-xl'></i>
+                <span>إغلاق</span>
+            </button>
+        </div>
+    </form>
+</div>

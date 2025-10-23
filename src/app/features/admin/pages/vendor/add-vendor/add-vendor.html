@@ -1,0 +1,133 @@
+<div class="px-4">
+    <div class="mb-4 px-2">
+        <p class="text-2xl font-bold py-8">إضافة مورد جديد</p>
+    </div>
+    <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()" class="px-3 text-[#1f2635] flex flex-col gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+            <div class="flex flex-col gap-2">
+                <label for="vendorNameAr" class="font-bold text-sm">كود المورد*</label>
+                <div class="relative">
+                    <input type="text" id="vendorCode" formControlName="vendorCode" placeholder=" كود المورد" [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (vendorCode?.invalid && vendorCode?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-store absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="vendorForm" controlName="vendorCode"></app-form-error>
+            </div>
+            <!-- Vendor Name Arabic -->
+            <div class="flex flex-col gap-2">
+                <label for="vendorNameAr" class="font-bold text-sm">اسم المورد (عربي)*</label>
+                <div class="relative">
+                    <input type="text" id="vendorNameAr" formControlName="vendorNameAr" placeholder="اسم المورد (عربي)"
+                        [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (vendorNameAr?.invalid && vendorNameAr?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-store absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="vendorForm" controlName="vendorNameAr"></app-form-error>
+            </div>
+
+            <!-- Vendor Name English -->
+            <div class="flex flex-col gap-2">
+                <label for="vendorNameEn" class="font-bold text-sm">اسم المورد (إنجليزي)*</label>
+                <div class="relative">
+                    <input type="text" id="vendorNameEn" formControlName="vendorNameEn"
+                        placeholder="اسم المورد (إنجليزي)" [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (vendorNameEn?.invalid && vendorNameEn?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-store absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="vendorForm" controlName="vendorNameEn"></app-form-error>
+            </div>
+
+
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4  border-t border-gray-200 pt-8">
+            <!-- Contact Email -->
+            <div class="flex flex-col gap-2">
+                <label for="contactEmail" class="font-bold text-sm">البريد الإلكتروني*</label>
+                <div class="relative">
+                    <input type="email" id="contactEmail" formControlName="contactEmail" placeholder="البريد الإلكتروني"
+                        [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (contactEmail?.invalid && contactEmail?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-envelope absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="vendorForm" controlName="contactEmail"></app-form-error>
+            </div>
+
+            <!-- Contact Phone -->
+            <div class="flex flex-col gap-2">
+                <label for="contactPhone" class="font-bold text-sm">رقم الهاتف*</label>
+                <div class="relative">
+                    <input type="text" id="contactPhone" formControlName="contactPhone" placeholder="رقم الهاتف"
+                        [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (contactPhone?.invalid && contactPhone?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-phone absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="vendorForm" controlName="contactPhone"></app-form-error>
+            </div>
+
+            <!-- Headquarters Address -->
+            <div class="flex flex-col col-span-2 gap-2">
+                <label for="headquartersAddress" class="font-bold text-sm">عنوان المقر الرئيسي*</label>
+                <div class="relative">
+                    <textarea type="text" id="headquartersAddress" formControlName="headquartersAddress"
+                        placeholder="عنوان المقر الرئيسي"
+                        [class]="'px-4 pl-10 placeholder:text-gray-400 h-[80px] text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (headquartersAddress?.invalid && headquartersAddress?.touched ? 'border-red-500' : 'border-[#ebecf5]')"></textarea>
+                    <i class='bx bx-map absolute left-3 top-8 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="vendorForm" controlName="headquartersAddress"></app-form-error>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <label for="logo" class="font-bold text-sm">رابط الشعار</label>
+            <div class="relative">
+                <input type="text" id="logo" formControlName="logo"
+                    placeholder="رابط الشعار (مثال: https://example.com/logo.png)" [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (logo?.invalid && logo?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                <i class='bx bx-image absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+            </div>
+            <app-form-error [form]="vendorForm" controlName="logo"></app-form-error>
+        </div>
+        <div class="grid sm:grid-cols-12 gap-2 sm:gap-6 border-t border-gray-200 py-4">
+            <div class="sm:col-span-9">
+                <div class="flex items-center gap-5">
+                    <div class="flex flex-col gap-1">
+                        <div class="sm:col-span-3">
+                            <label class="inline-block text-sm font-bold text-gray-800 mt-2.5 mb-4">
+                                معاينة الشعار
+                            </label>
+                        </div>
+                        <img class="inline-block size-16 rounded-full ring-2 ring-white"
+                            [src]="logoPreview || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAMAAAAL34HQAAAAY1BMVEU9QHD///+kpbzU1eDR0t1wcpahorlER3X6+vtRU3/n5+1HSneTla/X2OKBg6LAwdDy8vV3eZu7vM1oa5CIiqhYW4RiZYuur8OZm7Tt7fLe3uZeYIi1tsnJyte/wNCVl7GFh6VixGkvAAACx0lEQVR4nO2W25KqMBBFaQQJCQioyGXU8f+/8nSuE4axBqes87TXAxJJNTvs7k6SBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA2MDh8I4oRXV6R5iAEjt/25LjaMfnWrRZty1MR6m7u/godDbjIpViun+8KCslL6ukhaziaAfjpjBZkHVYyiprc99uXJ6lTynIOlGbW8zSriSq/jIQVb+HOTUUZI2UuTAlj4qZpkOZ34gum0WNxjYv6xzuNB9utQO1xS9hGqHDeFnHcKepSOhFFjXdNsvaSynbICala/Qspcn8srVfNfFJrf4ESS+iP5MbhxFBzI4eUZjaJSpbW27WpaUFWc0ijWoa/GuG1VtuvioCX7nVUlSThV+UWizkFVkznYdZyMYmp3CFxC5mX7M/BHXa7kk9k6WI8rsU9dUkKJdl76Pv/yZLhEIsTPSDnyCj6SNJVba0qqsg6+SjiM9E9w3vXbZIke2yOInko1e6qPZmlNv/K5dkDja3+eENQRYnUdaVZTebADxyE5qV79tk9cNgFzaQ6J/LYhvXFkay8sGaxZ1BvkNWwPjHl85PqBePR1pbGKe8x/jHF/VswouyODvTRco3i6d3ikvzuSzzveOU39CWf5H1GTWIbKniQNyD19vyWpbSjT189OKvDeIqXWCOkOt2agvwW8PRVTjQvGr8QVYt3fScqNCrs+XR/bWdum3C9HdlOo5Z50htnOANW6qmdZ4EWY3XvDPbTeX2hVvc/V6RVUiaHqU6HZ2eO+/6hTovjxAH85aOxPeNN8jiSt3lquxqq4ejzpekv/5k/CZZSS9dH7S5qfhEojvsPZrMFppC4E/yTFbSubYsbYO5tDbMSwm/SPmiylqxG3o/HGc+Bj7iyd4KlvftGBalfJnOYrrtvfXlwMfA5r1nVwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4D/yDxDJGsIAj86IAAAAAElFTkSuQmCC'"
+                            alt="Vendor Logo">
+                    </div>
+                    <div class="flex gap-x-2 mt-10">
+                        <div>
+                            <button type="button" (click)="removeLogo()" *ngIf="logoPreview"
+                                class="py-2.5 px-3 inline-flex items-center text-sm rounded-lg bg-white text-[#e53d33] font-bold hover:bg-red-50 transition-colors">
+                                حذف الشعار
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Action Buttons -->
+        <div class="flex items-center justify-end gap-4 pt-6 pb-6">
+            <button type="submit"
+                class="bg-[#00853e] text-white cursor-pointer px-6 py-2 rounded-md flex items-center gap-2 transition-colors font-medium text-xs">
+                <i class='bx bx-plus text-xl'></i>
+                <span>إضافة المورد</span>
+            </button>
+            <button type="button" (click)="onCancel()"
+                class="bg-[#ffffff] text-[#667085] cursor-pointer px-4 py-2 rounded-md flex items-center gap-0.5 border border-fuchsia-100 transition-colors font-medium text-xs">
+                <i class='bx bx-x text-xl'></i>
+                <span>إغلاق</span>
+            </button>
+        </div>
+    </form>
+</div>

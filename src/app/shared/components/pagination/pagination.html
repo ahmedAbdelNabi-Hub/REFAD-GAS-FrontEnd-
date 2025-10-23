@@ -1,0 +1,62 @@
+<div class="px-2 py-4 bg-white border-t w-full  border-gray-200">
+    <!-- Records info -->
+    <div class="flex flex-col mb-2 sm:flex-row sm:justify-between sm:items-center gap-4 ">
+        <div class="flex items-center gap-2 text-sm text-gray-600">
+            <span>
+                عرض
+                <span class="font-semibold text-gray-900">{{ startRecord() }}</span>
+                إلى
+                <span class="font-semibold text-gray-900">{{ endRecord() }}</span>
+                من
+                <span class="font-semibold text-gray-900">{{ totalItems() }}</span>
+                موظف
+            </span>
+        </div>
+    </div>
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+
+        <!-- Mobile page info -->
+        <div class="sm:hidden text-center text-sm text-gray-600">
+            صفحة {{ currentPage() }} من {{ totalPages() }}
+        </div>
+
+        <nav class="flex items-center w-full justify-between gap-1 " aria-label="Pagination">
+            <!-- Previous -->
+            <button type="button" (click)="previousPage.emit()" [disabled]="currentPage() <= 1 "
+                class="px-4 flex items-center gap-1 py-1.5 text-sm font-bold text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+                <span class="hidden sm:inline ml-1">
+                    السابق
+                </span>
+            </button>
+
+            <!-- Pages -->
+            <div class="hidden sm:flex items-center gap-1">
+                @for (page of pageNumbers(); track page) {
+                @if (page !== '...') {
+                <button type="button" (click)="pageChange.emit(+page)" [class]="getPageButtonClass(+page)">
+                    {{ page }}
+                </button>
+                } @else {
+                <span class="px-3 py-2 text-sm font-medium text-gray-500">...</span>
+                }
+                }
+            </div>
+
+            <!-- Next -->
+            <button type="button" (click)="nextPage.emit()" [disabled]="currentPage() >= totalPages() "
+                class="px-4 flex items-center gap-1 py-1.5 text-sm font-bold text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed">
+
+                <span class="hidden sm:inline mr-1">
+                    التالي
+                </span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+
+            </button>
+        </nav>
+    </div>
+</div>

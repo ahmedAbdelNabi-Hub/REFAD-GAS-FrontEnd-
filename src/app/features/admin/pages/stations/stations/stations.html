@@ -1,0 +1,206 @@
+<div class="px-4 pb-8">
+    <div class="mb-4 px-2">
+        <p class="text-2xl font-bold py-8">إدارة المحطات</p>
+    </div>
+
+    <div class="">
+        <div class="bg-white mb-2 w-full mx-auto">
+            <div class="flex items-center justify-between mb-2 gap-4">
+                <div class="flex items-center gap-3">
+                    <!-- Search Input -->
+                    <div class="relative">
+                        <i class='bx bx-search absolute top-2.5 right-2 text-xl text-gray-500'></i>
+                        <input type="text" [formControl]="searchControl"
+                            class="placeholder:text-gray-400 outline-none px-8 text-[12px] flex w-[240px] py-2 border border-gray-200 rounded-md"
+                            placeholder="ابحث">
+                    </div>
+
+                    <!-- Reset Button -->
+                    <button (click)="resetFilters()"
+                        class="bg-white text-gray-500 py-2 rounded-md flex text-[12px] items-center gap-1 transition-colors hover:bg-gray-50">
+                        <i class='bx bx-revision text-xl'></i>
+                        <span class="text-xs font-semibold">إعادة</span>
+                    </button>
+                </div>
+
+                <!-- Right Side Buttons -->
+                <div class="flex items-center gap-3">
+                    <button routerLink="/admin/station/add"
+                        class="bg-[#00853e] text-white cursor-pointer px-4 py-2 rounded-md flex items-center gap-2 transition-colors font-medium text-xs hover:bg-[#007036]">
+                        <i class='bx bx-plus text-xl'></i>
+                        <span>إضافة محطة جديدة</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="max-w-[85rem] mx-auto">
+        <div class="flex flex-col">
+            <div
+                class="overflow-x-auto rounded-md [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
+                <div class="min-w-full inline-block align-middle">
+                    <div class="bg-white border rounded-md border-[#ebecf5] overflow-hidden">
+
+                        <!-- Loading State -->
+                        @if (isLoading()) {
+                        <div class="flex items-center justify-center py-12">
+                            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00853e]"></div>
+                        </div>
+                        }
+
+                        <!-- Table -->
+                        @else {
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-[#fafbfb]">
+                                <tr>
+                                    <th scope="col" class="ps-6 text-nowrap px-2 py-2 text-start">
+                                        <label for="hs-at-with-checkboxes-main" class="flex">
+                                            <input type="checkbox"
+                                                class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500"
+                                                id="hs-at-with-checkboxes-main">
+                                            <span class="sr-only">Checkbox</span>
+                                        </label>
+                                    </th>
+                                    <th scope="col" class="ps-6 text-nowrap lg:ps-3 xl:ps-0 pe-6 py-2 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-[12px] font-semibold uppercase text-[#42526d]">اسم
+                                                المحطة</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 text-nowrap py-2 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-xs font-semibold uppercase text-[#42526d]">اسم
+                                                المورد</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 text-nowrap py-2 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-xs font-semibold uppercase text-[#42526d]">الموقع</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-6 text-nowrap py-2 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-xs font-semibold uppercase text-[#42526d]">عدد طلبات
+                                                الوقود</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="px-4 text-nowrap py-2 text-end"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <!-- No Data State -->
+                                @if (stations().length === 0) {
+                                <tr>
+                                    <td colspan="6" class="text-center py-12">
+                                        <div class="flex flex-col items-center gap-2">
+                                            <i class='bx bx-inbox text-5xl text-gray-300'></i>
+                                            <p class="text-gray-500 text-sm">لا توجد بيانات</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                }
+
+                                <!-- Data Rows -->
+                                @for (station of stations(); track station.id) {
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="size-px whitespace-nowrap">
+                                        <div class="ps-6 py-3">
+                                            <label [for]="'checkbox-' + station.id" class="flex">
+                                                <input type="checkbox"
+                                                    class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500"
+                                                    [id]="'checkbox-' + station.id">
+                                                <span class="sr-only">Checkbox</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="size-px whitespace-nowrap">
+                                        <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                                            <div class="flex items-center gap-x-3">
+                                                <div class="grow">
+                                                    <span class="block text-xs font-bold text-gray-800">
+                                                        {{ station.stationNameAr }}
+                                                    </span>
+                                                    <span class="block text-[12px] text-gray-500">
+                                                        {{ station.stationId }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="h-px w-72 whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <span class="block text-xs font-medium text-gray-800">
+                                                {{ station.vendorNameAr }}
+                                            </span>
+                                            <span class="block text-[12px] text-gray-500">
+                                                {{ station.vendorNameEn }}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="h-px w-72 whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <span class="block text-xs font-medium text-gray-800">
+                                                {{ station.locationLat.toFixed(6) }}, {{ station.locationLng.toFixed(6)
+                                                }}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="size-px whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <span class="text-xs text-gray-500">
+                                                {{ station.fuelRequestCount }}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="size-px whitespace-nowrap">
+                                        <div class="px-2 flex items-center gap-1.5 py-2">
+                                            <i [routerLink]="['/admin/stations/edit', station.id]"
+                                                class='bx bx-edit-alt font-thin text-xl text-[#8c94a3] cursor-pointer hover:text-[#6c7483]'
+                                                title="تعديل">
+                                            </i>
+                                            <i 
+                                                class='bx bx-map font-thin text-xl text-[#00853e] cursor-pointer hover:text-[#007036]'
+                                                title="عرض على الخريطة">
+                                            </i>
+                                            <i (click)="deleteStation(station.id, $event)"
+                                                class='bx bx-trash text-xl text-[#eb6d66] cursor-pointer hover:text-[#d55d56]'
+                                                title="حذف">
+                                            </i>
+                                        </div>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                        }
+                        <div class="flex items-center justify-between w-full mt-2 px-4">
+                            <app-pagination class="w-full" [currentPage]="paginationService.currentPage()"
+                                [totalPages]="paginationService.totalPages()"
+                                [totalItems]="paginationService.totalItems()"
+                                [startRecord]="paginationService.startRecord()"
+                                [endRecord]="paginationService.endRecord()"
+                                [pageNumbers]="paginationService.pageNumbers()" [isLoading]="isLoading"
+                                (pageChange)="onPageChange($event)" (previousPage)="onPreviousPage()"
+                                (nextPage)="onNextPage()"></app-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Modal -->
+    <dialog #mapModal class="backdrop:bg-black backdrop:opacity-50 rounded-lg">
+        <div class="p-4 max-w-4xl w-full">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold">عرض المحطة على الخريطة</h3>
+                <button  class="text-gray-500 hover:text-gray-700">
+                    <i class='bx bx-x text-2xl'></i>
+                </button>
+            </div>
+            <div id="map" class="w-full h-[400px] rounded-md"></div>
+        </div>
+    </dialog>
+</div>

@@ -1,0 +1,21 @@
+.bg-login {
+    position: relative;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.129), rgba(0, 0, 0, 0.248)),
+        url('../../../../../assets/lls.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-login::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.bg-login>* {
+    position: relative;
+    z-index: 1;
+    /* يخلي المحتوى فوق التأثير */
+}
