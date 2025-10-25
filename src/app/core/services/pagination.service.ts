@@ -80,4 +80,6 @@ export class PaginationService {
     updateTotalItems(total: number): void {
         this.totalItems.set(total);
     }
+
+  
 }

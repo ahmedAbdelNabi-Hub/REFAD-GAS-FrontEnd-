@@ -63,6 +63,7 @@ export class VendorsComponent {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+
   }
 
   fetchVendors() {

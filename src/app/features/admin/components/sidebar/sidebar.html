@@ -23,8 +23,8 @@
     <nav class="flex-1 px-6 pb-4">
         <ul class="space-y-2">
             <li *ngFor="let item of menuItems">
-                <a [routerLink]="item.route" routerLinkActive="bg-refad font-medium text-white"
-                    [routerLinkActiveOptions]="{exact:true}"
+                <a [class.active]="isActive(item.route!, item.includeRoutes)" [routerLink]="item.route"
+                    routerLinkActive="bg-refad font-medium text-white" [routerLinkActiveOptions]="{exact:true}"
                     class="w-full flex font-bold items-center gap-1 px-3 p-0.5 rounded-2xl transition-colors duration-200 hover:bg-gray-100 text-gray-600 no-underline"
                     (click)="navigateTo(item)">
 

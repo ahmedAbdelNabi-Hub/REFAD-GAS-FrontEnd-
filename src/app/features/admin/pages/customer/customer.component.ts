@@ -1,6 +1,6 @@
-import { Component, computed, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import { Component, computed, ElementRef, inject, PLATFORM_ID, signal, ViewChild } from '@angular/core';
 import { RouterLink } from "@angular/router";
-import { debounceTime, distinctUntilChanged, Subject, takeUntil, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, skip, Subject, takeUntil, tap } from 'rxjs';
 import { PaginationService } from '../../../../core/services/pagination.service';
 import { ToastService } from '../../../../core/services/toast.service';
 import { CustomerService } from '../../services/customer.service';
@@ -8,7 +8,7 @@ import { ICompany } from '../../interface/Company/ICompany ';
 import { IPaginationParams } from '../../../../core/interfaces/IPaginationParams';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ICompanyFilter } from '../../interface/Company/ICompanyFilter';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Pagination } from "../../../../shared/components/pagination/pagination";
 
 @Component({
@@ -49,6 +49,7 @@ export class CustomerComponent {
   ngOnInit() {
     this.searchControl.valueChanges
       .pipe(
+        skip(1),
         debounceTime(500),
         distinctUntilChanged(),
         takeUntil(this.destroy$),
@@ -59,18 +60,16 @@ export class CustomerComponent {
       )
       .subscribe();
 
-    // Initial fetch
-    this.fetchCompanies();
+    if (isPlatformBrowser(this.platformId)) {
+      this.fetchCompanies();
+    }
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+
+  private platformId = inject(PLATFORM_ID);
 
   fetchCompanies() {
     this.isLoading.set(true);
-
     const filterParams: IPaginationParams = {
       pageIndex: this.paginationService.currentPage(),
       pageSize: this.paginationService.pageSize(),
@@ -87,6 +86,7 @@ export class CustomerComponent {
       .pipe(
         takeUntil(this.destroy$),
         tap((res) => {
+          console.log('Fetch triggered', new Date().toISOString());
           this.customers.set(res.data);
           this.paginationService.updateTotalItems(res.count);
           this.isLoading.set(false);
@@ -216,5 +216,11 @@ export class CustomerComponent {
   onSizeChange(newSize: number) {
     this.paginationService.changePageSize(newSize);
     this.fetchCompanies();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+
   }
 }

@@ -2,6 +2,11 @@
 @import 'boxicons';
 @plugin "daisyui";
 
+.modal-box {
+    max-width: 319px !important;
+    margin-top: 103px !important;
+}
+
 :root {
     --color-refad: #c29a5b;
 }

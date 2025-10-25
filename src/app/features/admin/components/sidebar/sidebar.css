@@ -40,3 +40,9 @@ nav::-webkit-scrollbar-track {
 .sidebar-expanded {
     width: 280px;
 }
+
+.active {
+    background-color: #c29a5b;
+    color: white;
+    font-weight: 600;
+}

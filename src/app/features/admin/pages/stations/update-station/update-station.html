@@ -1,1 +1,103 @@
-<p>update-station works!</p>
+<div class="px-4">
+    <div class="mb-4 px-2">
+        <p class="text-2xl font-bold py-8">تعديل المحطة</p>
+    </div>
+    <form [formGroup]="stationForm" (ngSubmit)="onSubmit()" class="px-3 text-[#1f2635] flex flex-col gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Vendor ID -->
+            <div class="flex flex-col gap-2">
+                <label for="vendorId" class="font-bold text-sm">المورد*</label>
+                <div class="relative">
+                    <select id="vendorId" formControlName="vendorId" [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border appearance-none ' + 
+                            (vendorId?.invalid && vendorId?.touched ? 'border-red-500' : 'border-[#ebecf5]')">
+                        <option value="" disabled>اختر المورد</option>
+                        <option *ngFor="let vendor of vendors" [value]="vendor.id">
+                            {{ vendor.name }}
+                        </option>
+                    </select>
+                    <i class='bx bx-store absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="stationForm" controlName="vendorId"></app-form-error>
+            </div>
+
+            <!-- Station ID -->
+            <div class="flex flex-col gap-2">
+                <label for="stationId" class="font-bold text-sm">كود المحطة*</label>
+                <div class="relative">
+                    <input type="text" id="stationId" formControlName="stationId" placeholder="مثال: STN-001" [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (stationCode?.invalid && stationCode?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-barcode absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="stationForm" controlName="stationId"></app-form-error>
+            </div>
+
+            <!-- Station Name Arabic -->
+            <div class="flex flex-col gap-2">
+                <label for="stationNameAr" class="font-bold text-sm">اسم المحطة (عربي)*</label>
+                <div class="relative">
+                    <input type="text" id="stationNameAr" formControlName="stationNameAr"
+                        placeholder="اسم المحطة (عربي)"
+                        [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (stationNameAr?.invalid && stationNameAr?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-gas-pump absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="stationForm" controlName="stationNameAr"></app-form-error>
+            </div>
+
+            <!-- Station Name English -->
+            <div class="flex flex-col gap-2">
+                <label for="stationNameEn" class="font-bold text-sm">اسم المحطة (إنجليزي)*</label>
+                <div class="relative">
+                    <input type="text" id="stationNameEn" formControlName="stationNameEn"
+                        placeholder="اسم المحطة (إنجليزي)"
+                        [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (stationNameEn?.invalid && stationNameEn?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-gas-pump absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="stationForm" controlName="stationNameEn"></app-form-error>
+            </div>
+
+            <!-- Location Longitude -->
+            <div class="flex flex-col gap-2">
+                <label for="locationLng" class="font-bold text-sm">خط الطول*</label>
+                <div class="relative">
+                    <input type="text" id="locationLng" formControlName="locationLng"
+                        placeholder="خط الطول (مثال: 46.6752957)" [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (locationLng?.invalid && locationLng?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-map absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="stationForm" controlName="locationLng"></app-form-error>
+            </div>
+
+            <!-- Location Latitude -->
+            <div class="flex flex-col gap-2">
+                <label for="locationLat" class="font-bold text-sm">خط العرض*</label>
+                <div class="relative">
+                    <input type="text" id="locationLat" formControlName="locationLat"
+                        placeholder="خط العرض (مثال: 24.7135517)" [class]="'px-4 pl-10 placeholder:text-gray-400 text-sm w-full outline-none box-shadow py-3.5 rounded-xl border ' + 
+                           (locationLat?.invalid && locationLat?.touched ? 'border-red-500' : 'border-[#ebecf5]')" />
+                    <i class='bx bx-map absolute left-3 top-1/2 -translate-y-1/2 text-xl text-[#667085]'></i>
+                </div>
+                <app-form-error [form]="stationForm" controlName="locationLat"></app-form-error>
+            </div>
+
+            <!-- Location Picker -->
+            <app-location-picker class="col-span-2" [coordinates]="typedCoords()"
+                (locationSelected)="onLocationSelected($event)"></app-location-picker>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center justify-end gap-4 pt-6 pb-6">
+            <button type="submit"
+                class="bg-[#00853e] text-white cursor-pointer px-6 py-2 rounded-md flex items-center gap-2 transition-colors font-medium text-xs">
+                <i class='bx bx-save text-xl'></i>
+                <span>حفظ التغييرات</span>
+            </button>
+            <button type="button" (click)="onCancel()"
+                class="bg-[#ffffff] text-[#667085] cursor-pointer px-4 py-2 rounded-md flex items-center gap-0.5 border border-fuchsia-100 transition-colors font-medium text-xs">
+                <i class='bx bx-x text-xl'></i>
+                <span>إغلاق</span>
+            </button>
+        </div>
+    </form>
+</div>

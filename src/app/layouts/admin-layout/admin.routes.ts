@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const ADMIN_ROUTES: Routes = [
     {
-        path: '',
+        path: 'statistics',
         pathMatch: "full",
         loadComponent: () =>
             import('../../features/admin/pages/dashboard/dashboard.component').then(
@@ -89,8 +89,18 @@ export const ADMIN_ROUTES: Routes = [
         loadComponent: () => import('../../features/admin/pages/stations/add-station/add-station').then((m) => m.AddStationComponent),
     },
     {
+        path: 'station/edit/:id',
+        pathMatch: "full",
+        loadComponent: () => import('../../features/admin/pages/stations/update-station/update-station').then((m) => m.EditStationComponent),
+    },
+    {
         path: 'vendor/edit/:id',
         pathMatch: "full",
         loadComponent: () => import('../../features/admin/pages/vendor/update-vendor/update-vendor').then((m) => m.UpdateVendor),
+    },
+    {
+        path: 'fuel-orders',
+        pathMatch: "full",
+        loadComponent: () => import('../../features/admin/pages/fuel/fuels/fuels').then((m) => m.Fuels),
     }
 ];

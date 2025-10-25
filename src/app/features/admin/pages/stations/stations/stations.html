@@ -7,15 +7,19 @@
         <div class="bg-white mb-2 w-full mx-auto">
             <div class="flex items-center justify-between mb-2 gap-4">
                 <div class="flex items-center gap-3">
-                    <!-- Search Input -->
                     <div class="relative">
                         <i class='bx bx-search absolute top-2.5 right-2 text-xl text-gray-500'></i>
                         <input type="text" [formControl]="searchControl"
                             class="placeholder:text-gray-400 outline-none px-8 text-[12px] flex w-[240px] py-2 border border-gray-200 rounded-md"
                             placeholder="ابحث">
                     </div>
+                    <div class="w-full max-w-[500px]">
+                        <app-custom-dropdown [options]="vendorDrowdown()" [placeholder]="'كل المردون'"
+                            [selectedId]="vendorId()" (selectedChange)="selectVendor($event)">
+                        </app-custom-dropdown>
+                    </div>
 
-                    <!-- Reset Button -->
+
                     <button (click)="resetFilters()"
                         class="bg-white text-gray-500 py-2 rounded-md flex text-[12px] items-center gap-1 transition-colors hover:bg-gray-50">
                         <i class='bx bx-revision text-xl'></i>
@@ -23,7 +27,6 @@
                     </button>
                 </div>
 
-                <!-- Right Side Buttons -->
                 <div class="flex items-center gap-3">
                     <button routerLink="/admin/station/add"
                         class="bg-[#00853e] text-white cursor-pointer px-4 py-2 rounded-md flex items-center gap-2 transition-colors font-medium text-xs hover:bg-[#007036]">
@@ -57,10 +60,8 @@
                                 <tr>
                                     <th scope="col" class="ps-6 text-nowrap px-2 py-2 text-start">
                                         <label for="hs-at-with-checkboxes-main" class="flex">
-                                            <input type="checkbox"
-                                                class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500"
-                                                id="hs-at-with-checkboxes-main">
-                                            <span class="sr-only">Checkbox</span>
+                                            <span class="text-[12px] font-semibold uppercase text-[#42526d]">كود
+                                                المحطة</span>
                                         </label>
                                     </th>
                                     <th scope="col" class="ps-6 text-nowrap lg:ps-3 xl:ps-0 pe-6 py-2 text-start">
@@ -105,66 +106,67 @@
                                 <!-- Data Rows -->
                                 @for (station of stations(); track station.id) {
                                 <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="size-px whitespace-nowrap">
+                                    <td class=" whitespace-nowrap">
                                         <div class="ps-6 py-3">
                                             <label [for]="'checkbox-' + station.id" class="flex">
-                                                <input type="checkbox"
-                                                    class="shrink-0 border-gray-300 rounded-sm text-blue-600 focus:ring-blue-500 checked:border-blue-500"
-                                                    [id]="'checkbox-' + station.id">
-                                                <span class="sr-only">Checkbox</span>
+                                                <span class="block text-[13px] text-blue-600">
+                                                    {{ station.stationId }}
+                                                </span>
                                             </label>
                                         </div>
                                     </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                                    <td class=" whitespace-nowrap">
+                                        <div class="ps-6 lg:ps-3 xl:ps-0 py-3">
                                             <div class="flex items-center gap-x-3">
                                                 <div class="grow">
                                                     <span class="block text-xs font-bold text-gray-800">
                                                         {{ station.stationNameAr }}
                                                     </span>
-                                                    <span class="block text-[12px] text-gray-500">
-                                                        {{ station.stationId }}
-                                                    </span>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="h-px w-72 whitespace-nowrap">
+                                    <td class="h-px w-40 whitespace-nowrap">
                                         <div class="px-6 py-3">
                                             <span class="block text-xs font-medium text-gray-800">
                                                 {{ station.vendorNameAr }}
                                             </span>
-                                            <span class="block text-[12px] text-gray-500">
+                                            <!-- <span class="block text-[12px] text-gray-500">
                                                 {{ station.vendorNameEn }}
-                                            </span>
+                                            </span> -->
                                         </div>
                                     </td>
-                                    <td class="h-px w-72 whitespace-nowrap">
+                                    <td class="h-px w-40 whitespace-nowrap">
                                         <div class="px-6 py-3">
                                             <span class="block text-xs font-medium text-gray-800">
-                                                {{ station.locationLat.toFixed(6) }}, {{ station.locationLng.toFixed(6)
-                                                }}
+                                                <div class="flex items-center gap-3">
+                                                    <a target="_blank"
+                                                        [href]="'https://www.google.com/maps?q=' + station.locationLat + ',' + station.locationLng"
+                                                        class="bg-[#00853e] text-white cursor-pointer px-3 py-1.5 rounded-md flex items-center gap-2 transition-colors font-medium text-xs hover:bg-[#007036]">
+                                                        <i class='bx bx-map font-thin text-xl text-[#ffffff] cursor-pointer '
+                                                            title="عرض على الخريطة">
+                                                        </i> <span> عرض على الخريطة </span>
+                                                    </a>
+                                                </div>
                                             </span>
                                         </div>
                                     </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-3">
+                                    <td class=" whitespace-nowrap">
+                                        <div class="px-8 py-3">
                                             <span class="text-xs text-gray-500">
-                                                {{ station.fuelRequestCount }}
+                                                {{ station.fuelRequestCount }} - طلب
                                             </span>
                                         </div>
                                     </td>
-                                    <td class="size-px whitespace-nowrap">
+                                    <td class="w-32 whitespace-nowrap">
                                         <div class="px-2 flex items-center gap-1.5 py-2">
-                                            <i [routerLink]="['/admin/stations/edit', station.id]"
+                                            <i [routerLink]="['/admin/station/edit', station.id]"
                                                 class='bx bx-edit-alt font-thin text-xl text-[#8c94a3] cursor-pointer hover:text-[#6c7483]'
                                                 title="تعديل">
                                             </i>
-                                            <i 
-                                                class='bx bx-map font-thin text-xl text-[#00853e] cursor-pointer hover:text-[#007036]'
-                                                title="عرض على الخريطة">
-                                            </i>
-                                            <i (click)="deleteStation(station.id, $event)"
+
+                                            <i (click)="showModal(station.id)"
                                                 class='bx bx-trash text-xl text-[#eb6d66] cursor-pointer hover:text-[#d55d56]'
                                                 title="حذف">
                                             </i>
@@ -190,17 +192,20 @@
             </div>
         </div>
     </div>
-
-    <!-- Map Modal -->
-    <dialog #mapModal class="backdrop:bg-black backdrop:opacity-50 rounded-lg">
-        <div class="p-4 max-w-4xl w-full">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-bold">عرض المحطة على الخريطة</h3>
-                <button  class="text-gray-500 hover:text-gray-700">
-                    <i class='bx bx-x text-2xl'></i>
-                </button>
+    <dialog id="my_modal_1" #actionModal class="modal">
+        <div class="modal-box flex flex-col items-center justify-center">
+            <div class="w-14 h-14 rounded-full flex bg-[#c29a5b] text-white text-xl items-center justify-center">
+                <i class='bx bx-question-mark'></i>
             </div>
-            <div id="map" class="w-full h-[400px] rounded-md"></div>
+            <p class="py-2">هل تريد حذف المحطه</p>
+            <div class="modal-action flex items-center justify-center gap-2">
+                <button (click)="deleteStation()"
+                    class="px-4 py-1 border border-[#b10000] text-sm rounded-md bg-[#b10000] text-[#ffff]">نعم</button>
+                <form method="dialog">
+                    <button (click)="closeModal()"
+                        class="px-4 py-1 text-sm border border-gray-200 rounded-md text-[#0a0a0a]">لا</button>
+                </form>
+            </div>
         </div>
     </dialog>
 </div>

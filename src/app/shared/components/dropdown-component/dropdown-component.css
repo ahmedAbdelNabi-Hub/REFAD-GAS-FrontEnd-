@@ -1,0 +1,7 @@
+.custom-dropdown button {
+    transition: background-color 0.2s ease;
+}
+
+.custom-dropdown button:hover {
+    background-color: #f9fafb;
+}

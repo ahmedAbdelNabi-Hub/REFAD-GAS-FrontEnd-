@@ -66,6 +66,7 @@ export class SupervisorsComponent {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+
   }
 
   fetchSupervisors() {

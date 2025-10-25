@@ -23,12 +23,13 @@ export class StationService {
     }
 
     getAllStations(
-        params: IPaginationParams,
+        params: IPaginationParams, vendorId: string
     ): Observable<IPagination<IStation>> {
         let httpParams = buildQueryParams({
             pageIndex: params.pageIndex,
             pageSize: params.pageSize,
             search: params.search,
+            vendorId: vendorId
         });
         return this.http.get<IPagination<IStation>>(this.baseUrl, { params: httpParams });
     }

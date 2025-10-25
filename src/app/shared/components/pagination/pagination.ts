@@ -8,6 +8,7 @@ import { Component, input, output } from '@angular/core';
   standalone: true
 })
 export class Pagination {
+  title = input<string>();
   currentPage = input.required<number>();
   totalPages = input.required<number>();
   totalItems = input.required<number>(); // Changed from totalEmployees to totalItems for reusability

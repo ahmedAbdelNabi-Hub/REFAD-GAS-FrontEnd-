@@ -7,10 +7,11 @@ export interface ICar {
     status: 'active' | 'inactive';
     controlType: string;
     limitQty: number;
+    usedQty: number;
     driverName: string;
     driverMobile: string;
     driverPassword: string;
     driverImageUrl?: string;
-    startDay ?: string;
+    startDay?: string;
     companyName: string;
 }

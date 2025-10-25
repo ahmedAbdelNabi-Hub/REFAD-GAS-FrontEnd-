@@ -1,0 +1,349 @@
+<div class="px-4 pb-8">
+    <div class="mb-4 px-2">
+        <p class="text-2xl font-bold py-8">إدارة طلبات الوقود</p>
+    </div>
+
+    <!-- Card Section -->
+    <div class="max-w-[85rem] mb-4 mx-auto">
+        <!-- Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-0 border-y border-gray-200">
+
+            <!-- Card 1: Total Requests -->
+            <div
+                class="p-4 md:p-5 relative before:absolute before:top-0 bg-[#f6f4f4] before:start-0 before:w-full before:h-px sm:before:w-px sm:before:h-full before:bg-gray-200 first:before:bg-transparent">
+                <div class="flex items-start gap-x-3">
+                    <i class='bx bx-list-ul text-2xl text-gray-500'></i>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-x-2">
+                            <p class="text-xs uppercase text-gray-500">إجمالي الطلبات</p>
+                            <div class="hs-tooltip">
+                                <div class="hs-tooltip-toggle">
+                                    <i class='bx bx-info-circle text-gray-500 text-lg'></i>
+                                    <span
+                                        class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-sm"
+                                        role="tooltip">
+                                        عدد الطلبات الكلي
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <h3 class="text-2xl font-bold text-gray-800">{{12002 | number}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Card -->
+
+            <!-- Card 2: Approved -->
+            <div
+                class="p-4 md:p-5 relative before:absolute before:top-0 before:start-0 before:w-full before:h-px sm:before:w-px sm:before:h-full before:bg-gray-200 first:before:bg-transparent">
+                <div class="flex items-start gap-x-3">
+                    <i class='bx bx-check-circle text-2xl text-green-600'></i>
+                    <div class="flex-1">
+                        <p class="text-xs uppercase text-gray-500">تمت الموافقة</p>
+                        <div class="mt-2 space-y-1">
+                            <h3 class="text-xl font-bold ">45.2 ر.س</h3>
+                            <p class="text-sm text-gray-600 flex items-center gap-1">
+                                <i class='bx bx-check text-green-500'></i>
+                                <span>40 طلب</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Card -->
+
+            <!-- Card 3: Pending -->
+            <div
+                class="p-4 md:p-5 relative before:absolute before:top-0 before:start-0 before:w-full before:h-px sm:before:w-px sm:before:h-full before:bg-gray-200 first:before:bg-transparent">
+                <div class="flex items-start gap-x-3">
+                    <i class='bx bx-time text-2xl text-yellow-600'></i>
+                    <div class="flex-1">
+                        <p class="text-xs uppercase text-gray-500">قيد الانتظار</p>
+                        <div class="mt-2 space-y-1">
+                            <h3 class="text-xl font-bold ">120 ر.س</h3>
+                            <p class="text-sm text-gray-600 flex items-center gap-1">
+                                <i class='bx bx-hourglass text-yellow-500'></i>
+                                <span>120 طلب</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Card -->
+
+            <!-- Card 4: Declined -->
+            <div
+                class="p-4 md:p-5 relative before:absolute before:top-0 before:start-0 before:w-full before:h-px sm:before:w-px sm:before:h-full before:bg-gray-200 first:before:bg-transparent">
+                <div class="flex items-start gap-x-3">
+                    <i class='bx bx-x-circle text-2xl text-red-600'></i>
+                    <div class="flex-1">
+                        <p class="text-xs uppercase text-gray-500">مرفوض</p>
+                        <div class="mt-2 space-y-1">
+                            <h3 class="text-xl font-bold text-red-600">0.00 ر.س</h3>
+                            <p class="text-sm text-gray-600 flex items-center gap-1">
+                                <i class='bx bx-block text-red-500'></i>
+                                <span>0 طلب</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Card -->
+
+        </div>
+        <!-- End Grid -->
+    </div>
+    <!-- End Card Section -->
+
+    <div class="bg-white mb-2 w-full mx-auto">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between mb-2 gap-4">
+            <!-- Filters -->
+            <div class="flex flex-wrap items-center gap-3">
+                <!-- Search -->
+                <div class="relative">
+                    <i class='bx bx-search absolute top-2.5 right-2 text-xl text-gray-500'></i>
+                    <input type="text" [formControl]="searchControl"
+                        class="placeholder:text-gray-400 outline-none px-8 text-[12px] w-[240px] py-2 border border-gray-200 rounded-md"
+                        placeholder="ابحث برقم اللوحة أو المحطة">
+                </div>
+
+                <!-- Company Dropdown -->
+                <!-- <div class="relative" #companyDropdown>
+                    <button (click)="toggleCompany()"
+                        class="bg-white text-gray-500 px-2 py-2 rounded-md border border-gray-200 flex text-xs items-center gap-3 min-w-[100px]">
+                        <span class="text-[12px]">{{ getCompanyLabel() }}</span>
+                        <i class='bx bx-chevron-down text-xl'></i>
+                    </button>
+                    @if (isCompanyOpen()) {
+                    <div
+                        class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
+                        <button (click)="selectCompany(null)"
+                            class="w-full text-right px-4 py-2 text-xs hover:bg-gray-50">
+                            الكل
+                        </button>
+                        @for (c of companies(); track c.id) {
+                        <button (click)="selectCompany(c.id)"
+                            class="w-full text-right px-4 py-2 text-xs hover:bg-gray-50"
+                            [class.bg-gray-100]="selectedCompany() === c.id">
+                            {{ c.name }}
+                        </button>
+                        }
+                    </div>
+                    }
+                </div> -->
+
+                <!-- Car Dropdown -->
+                <!-- <div class="relative" #carDropdown>
+                    <button (click)="toggleCar()" [disabled]="!selectedCompany()"
+                        class="bg-white text-gray-500 px-2 py-2 rounded-md border border-gray-200 flex text-xs items-center gap-3 min-w-[100px] disabled:opacity-50">
+                        <span class="text-[12px]">{{ getCarLabel() }}</span>
+                        <i class='bx bx-chevron-down text-xl'></i>
+                    </button>
+                    @if (isCarOpen() && cars().length > 0) {
+                    <div
+                        class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
+                        <button (click)="selectCar(null)" class="w-full text-right px-4 py-2 text-xs hover:bg-gray-50">
+                            الكل
+                        </button>
+                        @for (c of cars(); track c.id) {
+                        <button (click)="selectCar(c.id)" class="w-full text-right px-4 py-2 text-xs hover:bg-gray-50"
+                            [class.bg-gray-100]="selectedCar() === c.id">
+                            {{ c.name }}
+                        </button>
+                        }
+                    </div>
+                    }
+                </div> -->
+
+                <!-- Station Dropdown -->
+                <!-- <div class="relative" #stationDropdown>
+                    <button (click)="toggleStation()"
+                        class="bg-white text-gray-500 px-2 py-2 rounded-md border border-gray-200 flex text-xs items-center gap-3 min-w-[100px]">
+                        <span class="text-[12px]">{{ getStationLabel() }}</span>
+                        <i class='bx bx-chevron-down text-xl'></i>
+                    </button>
+                    @if (isStationOpen()) {
+                    <div
+                        class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
+                        <button (click)="selectStation(null)"
+                            class="w-full text-right px-4 py-2 text-xs hover:bg-gray-50">
+                            الكل
+                        </button>
+                        @for (s of stations(); track s.id) {
+                        <button (click)="selectStation(s.id)"
+                            class="w-full text-right px-4 py-2 text-xs hover:bg-gray-50"
+                            [class.bg-gray-100]="selectedStation() === s.id">
+                            {{ s.name }}
+                        </button>
+                        }
+                    </div>
+                    }
+                </div> -->
+
+                <!-- Status Dropdown -->
+                <div class="relative" #statusDropdown>
+                    <button (click)="toggleStatus()"
+                        class="bg-white text-gray-500 px-2 py-2 rounded-md border border-gray-200 flex text-xs items-center gap-3 min-w-[100px]">
+                        <span class="text-[12px]">{{ getStatusLabel() }}</span>
+                        <i class='bx bx-chevron-down text-xl'></i>
+                    </button>
+                    @if (isStatusOpen()) {
+                    <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                        @for (opt of statusOptions; track opt.value) {
+                        <button (click)="selectStatus(opt.value)"
+                            class="w-full text-right px-4 py-2 text-xs hover:bg-gray-50"
+                            [class.bg-gray-100]="selectedStatus() === opt.value">
+                            {{ opt.label }}
+                        </button>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Reset -->
+                <button (click)="resetFilters()"
+                    class="bg-white text-gray-500 py-2 rounded-md flex text-[12px] items-center gap-1 hover:bg-gray-50">
+                    <i class='bx bx-revision text-xl'></i>
+                    <span class="text-xs font-semibold">إعادة</span>
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="max-w-[85rem] mx-auto">
+        <div class="flex flex-col">
+            <div class="overflow-x-auto rounded-md [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:bg-gray-300">
+                <div class="min-w-full inline-block align-middle">
+                    <div class="bg-white border rounded-md border-[#ebecf5] overflow-hidden">
+                        @if (isLoading()) {
+                        <div class="flex items-center justify-center py-12">
+                            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00853e]"></div>
+                        </div>
+                        } @else {
+                        <table class="min-w-full divide-y divide-gray-200 text-right">
+                            <thead class="bg-[#fafbfb]">
+                                <tr>
+                                    <th class="ps-6 py-2 text-start">
+                                        <input type="checkbox" class="rounded-sm">
+                                    </th>
+                                    <th class="ps-6 py-2 text-xs text-nowrap font-semibold uppercase text-[#42526d]">
+                                        الشركة</th>
+                                    <th class="ps-6 py-2 text-xs text-nowrap font-semibold uppercase text-[#42526d]">
+                                        المحطة</th>
+                                    <th class="ps-6 py-2 text-xs text-nowrap font-semibold uppercase text-[#42526d]">
+                                        السيارة</th>
+
+                                    <th class="ps-6 py-2 text-xs text-nowrap font-semibold uppercase text-[#42526d]">رقم
+                                        اللوحة</th>
+                                    <th class="ps-6 py-2 text-xs text-nowrap font-semibold uppercase text-[#42526d]">نوع
+                                        البنزين
+                                    </th>
+                                    <th class="px-4 py-2 text-xs text-nowrap font-semibold uppercase text-[#42526d]">
+                                        الكمية</th>
+                                    <th class="px-4 py-2 text-xs text-nowrap font-semibold uppercase text-[#42526d]">
+                                        المبلغ</th>
+                                    <th class="px-4 py-2 text-xs text-nowrap font-semibold uppercase text-[#42526d]">
+                                        التاريخ</th>
+                                    <th class="px-4 py-2 text-xs text-nowrap font-semibold uppercase text-[#42526d]">
+                                        الحالة</th>
+                                    <th class="px-4 py-2"></th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="divide-y divide-gray-200">
+                                @if (fuelRequests().length === 0) {
+                                <tr>
+                                    <td colspan="11" class="text-center text-nowrap py-12">
+                                        <i class='bx bx-inbox text-5xl text-gray-300'></i>
+                                        <p class="text-gray-500 text-sm">لا توجد طلبات</p>
+                                    </td>
+                                </tr>
+                                }
+
+                                @for (req of fuelRequests(); track req.id) {
+                                <tr class="hover:bg-gray-50">
+                                    <td class="ps-6 py-3 text-nowrap">
+                                        <input type="checkbox" class="rounded-sm">
+                                    </td>
+                                    <td class="ps-6 py-3 text-nowrap text-xs font-bold text-gray-800">
+                                        {{ req.companyName }}
+                                    </td>
+                                    <td class="ps-6 py-3 text-nowrap text-xs text-gray-800">
+                                        {{ req.stationName }}
+                                    </td>
+                                    <td class="ps-6 py-3 text-nowrap text-xs text-gray-800">
+                                        {{ req.carName }}
+                                    </td>
+
+                                    <td class="ps-6 py-3 text-nowrap text-xs text-gray-800">
+                                        {{ req.carPlateNumber }}
+                                    </td>
+                                    <td class="ps-6 py-3 text-nowrap text-xs text-gray-800">
+                                        {{ req.fuelType }}
+                                    </td>
+                                    <td class="px-4 py-3 text-nowrap text-xs text-gray-800">
+                                        {{ req.qty }}
+                                    </td>
+                                    <td class="px-4 py-3 text-nowrap text-xs text-gray-800">
+                                        {{ req.amount | number:'1.2-2' }}
+                                    </td>
+                                    <td class="px-4 py-3 text-nowrap text-xs text-gray-800">
+                                        {{ formatDate(req.requestDate) }}
+                                    </td>
+                                    <td class="px-4 py-3 text-nowrap">
+                                        <span
+                                            [class]="'inline-flex items-center gap-1 py-1 px-2 rounded-full text-xs font-medium ' + getStatusClass(req.status)">
+                                            <i [class]="
+                                                    req.status === 'pending'
+                                                    ? 'bx bx-time text-yellow-500'
+                                                    : req.status === 'approved'
+                                                    ? 'bx bx-check-circle text-green-500'
+                                                    : 'bx bx-x-circle text-red-500'
+                                                ">
+                                            </i>
+                                            {{ req.status === 'pending'
+                                            ? 'معلق'
+                                            : req.status === 'approved'
+                                            ? 'موافق'
+                                            : 'مرفوض' }}
+                                        </span>
+                                    </td>
+
+                                    <td class="px-4 py-3 flex items-center gap-2 justify-center">
+                                        <i [routerLink]="['/admin/customer/details', req.id]"
+                                            class='bx bx-show text-xl font-thin text-[#7a8392] cursor-pointer hover:text-[#5a6372]'
+                                            title="عرض">
+                                        </i>
+                                        <i [routerLink]="['/admin/fuels/edit', req.id]"
+                                            class='bx bx-edit-alt text-xl text-[#8c94a3] cursor-pointer hover:text-[#6c7483]'
+                                            title="تعديل"></i>
+                                        <i class='bx bx-trash text-xl text-[#eb6d66] cursor-pointer hover:text-[#d55d56]'
+                                            title="حذف"></i>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        }
+                        <div class="mt-2 px-4">
+                            <app-pagination class="w-full" [currentPage]="paginationService.currentPage()"
+                                [totalPages]="paginationService.totalPages()"
+                                [totalItems]="paginationService.totalItems()"
+                                [startRecord]="paginationService.startRecord()"
+                                [endRecord]="paginationService.endRecord()"
+                                [pageNumbers]="paginationService.pageNumbers()" [isLoading]="isLoading"
+                                (pageChange)="onPageChange($event)" (previousPage)="onPreviousPage()"
+                                (nextPage)="onNextPage()"></app-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
