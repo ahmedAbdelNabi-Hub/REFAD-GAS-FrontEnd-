@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { RouterOutlet } from "@angular/router";
-import { SidebarComponent } from "../../features/admin/components/sidebar/sidebar";
+import { AuthService } from '../../core/services/auth.service';
+import { SidebarComponent } from '../../features/dashboard/components/sidebar/sidebar';
 
 @Component({
     selector: 'app-main-layout',
@@ -17,9 +18,9 @@ import { SidebarComponent } from "../../features/admin/components/sidebar/sideba
         </main>`,
 })
 export class AdminLayoutComponent implements OnInit, OnDestroy {
-
+    private auth = inject(AuthService);
     ngOnInit(): void {
-
+        console.log("ssssssssss", this.auth.currentUser);
     }
     ngOnDestroy(): void {
 

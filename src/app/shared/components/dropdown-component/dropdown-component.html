@@ -1,17 +1,19 @@
 <div class="custom-dropdown relative inline-block w-full ">
     <!-- Trigger button -->
-    <button (click)="toggleDropdown()"
-        class=" bg-white text-gray-700 w-[200px] border border-gray-300 rounded-md px-3 py-2 flex justify-between items-center text-sm">
-        <span>{{ selectedLabel }}</span>
-        <i class='bx bx-chevron-down text-lg'></i>
+    <button (click)="toggleDropdown()" [ngClass]="IsIconDots ? 'w-[33px]' : 'w-[200px]'"
+        class=" bg-white text-gray-700   border border-gray-300 rounded-md px-2 py-2 flex justify-between items-center text-sm">
+        <span *ngIf="IsIconDots==false">{{ selectedLabel }}</span>
+        <span *ngIf="IsIconDots==true" class="bx bx-dots-vertical"></span>
+        <i *ngIf="IsIconDots==false" class='bx bx-chevron-down text-lg'></i>
     </button>
 
     <!-- Dropdown list -->
     <div *ngIf="isOpen()"
-        class="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
+        class="absolute left-0 mt-2  w-[250px]  bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
         <button *ngFor="let option of options" (click)="selectOption(option.id)"
             [class.bg-gray-100]="option.id === selectedId"
             class="w-full text-right px-4 py-2 text-sm hover:bg-gray-50 transition-colors">
+            <i class="{{ option.icon }}"></i>
             {{ option.name }}
         </button>
     </div>

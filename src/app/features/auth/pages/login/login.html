@@ -36,13 +36,23 @@
         <app-form-error [form]="loginForm" controlName="password"></app-form-error>
       </div>
 
-      <button type="submit" [disabled]="loginForm.invalid" class="w-full bg-refad hover:opacity-90 mt-2 text-[14px] text-white py-[10px] px-4 rounded-md transition duration-300 mb-4
-               {{ loginForm.invalid ? ' cursor-not-allowed' : '' }}">
-        تسجيل دخول
+      <button type="submit" [disabled]="loginForm.invalid || loading"
+        class="relative w-full bg-refad hover:opacity-90 mt-2 text-[14px] text-white py-[10px] px-4 rounded-md transition duration-300 mb-4 flex items-center justify-center">
+        <ng-container *ngIf="!loading; else loadingTpl">
+          تسجيل دخول
+        </ng-container>
+
+        <ng-template #loadingTpl>
+          <div class="flex items-center gap-2">
+            <span class="loader"></span>
+            <span>جاري تسجيل الدخول...</span>
+          </div>
+        </ng-template>
       </button>
+
     </form>
   </div>
   <div class="w-[73%] bg-login h-full flex flex-col   text-white py-8 px-10">
-    
+
   </div>
 </div>

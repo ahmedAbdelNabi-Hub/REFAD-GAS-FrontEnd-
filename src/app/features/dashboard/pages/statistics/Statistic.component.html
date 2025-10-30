@@ -1,0 +1,172 @@
+<div class="bg-[#f6f4f4] px-4 py-6">
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Title -->
+        <div class="mb-6 text-center md:text-right">
+            <p class="text-2xl font-bold">الإحصائيات</p>
+        </div>
+
+        <!-- ---------- STAT CARDS ---------- -->
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-3">
+            <!-- Card 1 – العملاء -->
+            <div class="bg-white rounded-xl  pt-2 pb-4 px-4  hover:shadow-md transition-shadow">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="text-right">
+                        <p class="text-[#636566] font-extrabold text-xs md:text-sm mb-1">عدد العملاء</p>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-900">
+                            {{dashboardCounters()?.totalCompanies}}
+                        </h3>
+                    </div>
+                    <div class="bg-[#f2e9dc] rounded-full h-12 w-12 flex items-center justify-center">
+                        <i class='bx bx-user text-lg text-[#b10000]'></i>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between text-xs md:text-sm gap-2">
+                    <div class="flex items-center gap-1">
+                        <i class='bx bx-x-circle text-[#b10000]'></i>
+                        <span class="font-medium text-[#b10000]">
+                            {{dashboardCounters()?.suspendedCompanies}} موقوف
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <i class='bx bx-check-circle text-[#b10000]'></i>
+                        <span class="font-medium text-[#b10000]">
+                            {{dashboardCounters()?.activeCompanies}} فعال
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 – السيارات -->
+            <div class="bg-white rounded-xl  pt-2 pb-4 px-4    hover:shadow-md transition-shadow">
+                <div class="flex items-start justify-between  mb-4">
+                    <div class="text-right">
+                        <p class="text-[#636566] font-extrabold text-xs md:text-sm mb-1">إجمالي السيارات</p>
+                        <h3 class="text-xl md:text-2xl mt-2 font-extrabold text-gray-900">
+                            {{dashboardCounters()?.totalCars}}
+                        </h3>
+                    </div>
+                    <div class="bg-[#f2e9dc] rounded-full h-12 w-12 flex items-center justify-center">
+                        <i class='bx bx-car text-lg text-[#b10000]'></i>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between text-xs md:text-sm gap-2">
+                    <div class="flex items-center gap-1">
+                        <i class='bx bx-check-circle text-[#5ac1f2]'></i>
+                        <span class="font-medium text-[#5ac1f2]">
+                            {{dashboardCounters()?.activeCars}} نشطة
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <i class='bx bx-x-circle text-[#f576ab]'></i>
+                        <span class="font-medium text-[#f576ab]">
+                            {{dashboardCounters()?.inactiveCars}} موقوفة
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 – المدفوعات -->
+            <div class="bg-white rounded-xl  pt-2 pb-4 px-4    hover:shadow-md transition-shadow">
+                <div class="flex items-start justify-between  mb-4">
+                    <div class="text-right">
+                        <p class="text-[#636566] font-extrabold text-xs md:text-sm mb-1">إجمالي المدفوعات</p>
+                        <h3 class="text-xl md:text-2xl mt-2 font-extrabold text-gray-900">
+                            {{dashboardCounters()?.totalPayments}}
+                        </h3>
+                    </div>
+                    <div class="bg-[#f2e9dc] rounded-full h-12 w-12 flex items-center justify-center">
+                        <i class='bx bx-credit-card text-lg text-[#b10000]'></i>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between text-xs md:text-sm gap-2">
+                    <div class="flex items-center gap-1">
+                        <i class='bx bx-check-circle text-[#b10000]'></i>
+                        <span class="font-medium text-[#b10000]">
+                            {{dashboardCounters()?.paidPayments}} مدفوعة
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <i class='bx bx-hourglass text-[#c29a5b]'></i>
+                        <span class="font-medium text-[#c29a5b]">
+                            {{dashboardCounters()?.pendingPayments}} معلقة
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 – الموردين -->
+            <div class="bg-white rounded-xl  pt-2 pb-4 px-4    hover:shadow-md transition-shadow">
+                <div class="flex items-start justify-between  mb-4">
+                    <div class="text-right">
+                        <p class="text-[#636566] font-extrabold text-xs md:text-sm mb-1">عدد الموردين</p>
+                        <h3 class="text-xl md:text-2xl mt-2 font-extrabold text-gray-900">
+                            {{dashboardCounters()?.totalVendors}}
+                        </h3>
+                    </div>
+                    <div class="bg-[#f2e9dc] rounded-full h-12 w-12 flex items-center justify-center">
+                        <i class='bx bx-buildings text-lg text-[#b10000]'></i>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between text-xs md:text-sm gap-2">
+                    <div class="flex items-center gap-1">
+                        <i class='bx bx-check-circle text-[#b10000]'></i>
+                        <span class="font-medium text-[#b10000]">
+                            {{dashboardCounters()?.suspendedVendors}} موقوف
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <i class='bx bx-x-circle text-[#c29a5b]'></i>
+                        <span class="font-medium text-[#c29a5b]">
+                            {{dashboardCounters()?.activeVendors}} فعال
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 – المحطات -->
+            <div class="bg-white rounded-xl  pt-2 pb-4 px-4    hover:shadow-md transition-shadow">
+                <div class="flex items-start justify-between  mb-4">
+                    <div class="text-right">
+                        <p class="text-[#636566] font-extrabold text-xs md:text-sm mb-1">عدد المحطات</p>
+                        <h3 class="text-xl md:text-2xl mt-2 font-extrabold text-gray-900">
+                            {{dashboardCounters()?.totalStations}}
+                        </h3>
+                    </div>
+                    <div class="bg-[#f2e9dc] rounded-full h-12 w-12 flex items-center justify-center">
+                        <i class='bx bx-gas-pump text-lg text-[#b10000]'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ---------- CHARTS SECTION ---------- -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+
+            <!-- Doughnut (Top Fuel Companies) -->
+            <div class="bg-white rounded-2xl  pt-2 pb-4 px-4  md:p-6 flex flex-col items-center h-[320px] md:h-[420px]  ">
+                <h3 class="text-base md:text-lg font-semibold mb-2">الأعلى الشركات طلباً للوقود</h3>
+                <div class="flex-1 w-full flex items-center justify-center">
+                    <app-top-fuel-companies-chart></app-top-fuel-companies-chart>
+                </div>
+            </div>
+
+            <!-- Bar Chart (Monthly Fuel) -->
+            <div dir="rtl"
+                class="bg-white col-span-1 md:col-span-2 rounded-2xl  pt-2 pb-4 px-4  md:p-6 flex flex-col h-[320px] md:h-[420px]  ">
+                <div class=" mb-4">
+                    <h2 class="text-base md:text-lg font-bold text-gray-800">إجمالي الطلبات الشهرية للوقود</h2>
+                    <p class="text-xs md:text-sm text-gray-600">عرض بياني لمبالغ الوقود المطلوبة خلال العام الحالي</p>
+                </div>
+                <div class="flex-1">
+                    <canvas #fuelChart></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

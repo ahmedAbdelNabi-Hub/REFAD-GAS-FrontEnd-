@@ -14,6 +14,7 @@ export class DropdownComponent {
   @Input() options: IDropdown[] = [];
   @Input() placeholder: string = 'Select';
   @Input() selectedId: string | null = null;
+  @Input() IsIconDots: boolean | null = null;
   @Output() selectedChange = new EventEmitter<string>();
 
   isOpen = signal(false);

@@ -1,7 +1,11 @@
 import { Routes } from "@angular/router";
+import { loginGuard } from "../../core/guards/login-guard";
 
 export const AUTH_ROUTES: Routes = [
-    { path: 'login', loadComponent: () => import('../../features/auth/pages/login/login').then(m => m.Login) },
-    { path: '', redirectTo: 'login', pathMatch: 'full' }
+    {
+        path: 'login', loadComponent:
+            () => import('../../features/auth/pages/login/login').then(m => m.Login)
+    },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 

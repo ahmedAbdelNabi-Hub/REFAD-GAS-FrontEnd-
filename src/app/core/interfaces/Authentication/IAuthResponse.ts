@@ -1,6 +1,9 @@
+
 export interface IAuthResponse {
-    token: string;
-    refreshToken: string;
-    expiration: string; 
-  }
-  
+  email: string;
+  name: string;
+  token: string;
+  role: string;
+  refreshToken: string;
+  expiresAt: Date;
+}
